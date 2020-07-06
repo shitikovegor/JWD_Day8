@@ -50,23 +50,6 @@ public class Library {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null || getClass() != obj.getClass())
-            return false;
-
-        Library other = (Library) obj;
-
-        return books != null ? books.equals(other.books) : other.books == null;
-    }
-
-    @Override
-    public int hashCode() {
-        return books != null ? books.hashCode() : 0;
-    }
-
-    @Override
     public String toString() {
         return new StringJoiner(", ", Library.class.getSimpleName() + "[", "]")
                 .add("books=" + books)
