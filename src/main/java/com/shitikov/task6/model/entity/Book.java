@@ -1,6 +1,10 @@
 package com.shitikov.task6.model.entity;
 
+import com.shitikov.task6.model.builder.BookBuilder;
+
 import java.util.*;
+
+import static com.shitikov.task6.model.util.IdGenerator.generateId;
 
 public class Book {
     private String id;
@@ -9,16 +13,23 @@ public class Book {
     private String publishingHouse;
     private int pages;
 
+    public Book(BookBuilder bookBuilder) {
+        this.id = generateId();
+        this.name = bookBuilder.getName();
+        this.authors = bookBuilder.getAuthors();
+        this.publishingHouse = bookBuilder.getPublishingHouse();
+        this.pages = bookBuilder.getPages();
+    }
+
     public Book() {
-        this.id = createId();
+        this.id = generateId();
         this.name = "";
         this.authors = new ArrayList<>();
         this.publishingHouse = "";
-        this.pages = 0;
     }
 
     public Book(String name, List<String> authors, String publishingHouse, int pages) {
-        this.id = createId();
+        this.id = generateId();
         this.name = name;
         this.authors = authors;
         this.publishingHouse = publishingHouse;
@@ -60,11 +71,6 @@ public class Book {
 
     public void setPages(int pages) {
         this.pages = pages;
-    }
-
-    private String createId() {
-        UUID newId = UUID.randomUUID();
-        return newId.toString();
     }
 
     @Override
@@ -109,5 +115,63 @@ public class Book {
                 .add("publishingHouse='" + publishingHouse + "'")
                 .add("pages=" + pages)
                 .toString();
+    }
+
+    public static class AuthorComparator implements Comparator<Book> {
+        @Override
+        public int compare(Book book1, Book book2) {
+            List<String> authors1 = book1.getAuthors();
+            List<String> authors2 = book2.getAuthors();
+
+            Collections.sort(authors1);
+            Collections.sort(authors1);
+
+            Iterator<String> it1 = authors1.iterator();
+            Iterator<String> it2 = authors2.iterator();
+
+            while (it1.hasNext()) {
+                String author1 = it1.next();
+                String author2 = it2.next();
+                if (author1.compareTo(author2) != 0) {
+                    return author1.compareTo(author2);
+                }
+            }
+
+            return 0;
+        }
+    }
+
+    public static class IdComparator implements Comparator<Book> {
+        @Override
+        public int compare(Book book1, Book book2) {
+            return book1.getId().compareTo(book2.getId());
+        }
+    }
+
+    public static class NameComparator implements Comparator<Book> {
+        @Override
+        public int compare(Book book1, Book book2) {
+            return book1.getName().compareTo(book2.getName());
+        }
+    }
+
+    public static class PagesComparator implements Comparator<Book> {
+        @Override
+        public int compare(Book book1, Book book2) {
+            int pages1 = book1.getPages();
+            int pages2 = book2.getPages();
+
+            if (pages1 == pages2) {
+                return 0;
+            }
+            return pages1 > pages2 ? 1 : -1;
+        }
+    }
+
+    public static class PublishingHouseComparator implements Comparator<Book> {
+        @Override
+        public int compare(Book book1, Book book2) {
+            return book1.getPublishingHouse().compareTo(book2.getPublishingHouse());
+        }
     }
 }

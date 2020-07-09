@@ -1,4 +1,4 @@
-package com.shitikov.task6.model.dao;
+package com.shitikov.task6.model.service;
 
 import com.shitikov.task6.model.entity.Book;
 import com.shitikov.task6.model.exception.ProjectException;
@@ -6,8 +6,8 @@ import com.shitikov.task6.model.exception.ProjectException;
 import java.util.List;
 import java.util.Optional;
 
-public interface BookListDao {
-    void addBook(Book book) throws ProjectException;
+public interface LibraryService {
+    void addBook(String name, List<String> authors, String publishingHouse, int pages) throws ProjectException;
 
     void removeBook(Book book) throws ProjectException;
 
@@ -30,4 +30,6 @@ public interface BookListDao {
     List<Book> sortBooksByPublishingHouse();
 
     List<Book> sortBooksByPages();
+
+    List<Book> findAll();
 }

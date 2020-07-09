@@ -8,10 +8,9 @@ import java.util.List;
 import java.util.StringJoiner;
 
 public class Library {
-    private List<Book> books;
     private static final int MAX_CAPACITY = 1000;
-
     private static Library instance;
+    private List<Book> books;
 
     private Library() {
         this.books = new ArrayList<>();
