@@ -1,7 +1,5 @@
 package com.shitikov.task6.model.entity;
 
-import com.shitikov.task6.model.exception.ProjectException;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -24,28 +22,27 @@ public class Library {
     }
 
     public List<Book> getBooks() {
-        List<Book> copy = copy = Collections.unmodifiableList(books);
-        return copy;
+        return Collections.unmodifiableList(books);
     }
 
-    public void add(Book book) throws ProjectException {
-        if (book == null) {
-            throw new ProjectException("Book is null.");
-        }
-        if (books.size() == MAX_CAPACITY) {
-            throw new ProjectException("No library space.");
-        }
-        if (books.contains(book)) {
-            throw new ProjectException("Book exists in library.");
-        }
+    public void add(Book book) {
         books.add(book);
     }
 
-    public void remove(Book book) throws ProjectException {
-        if (!books.contains(book)) {
-            throw new ProjectException("Book doesn't exist in library.");
-        }
+    public void remove(Book book) {
         books.remove(book);
+    }
+
+    public int size() {
+        return books.size();
+    }
+
+    public int getMaxCapacity() {
+        return MAX_CAPACITY;
+    }
+
+    public boolean contains(Book book) {
+        return books.contains(book);
     }
 
     @Override

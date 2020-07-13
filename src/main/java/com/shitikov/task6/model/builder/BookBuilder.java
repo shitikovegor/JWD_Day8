@@ -3,7 +3,6 @@ package com.shitikov.task6.model.builder;
 import com.shitikov.task6.model.entity.Book;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class BookBuilder {
@@ -25,7 +24,7 @@ public class BookBuilder {
         return authors;
     }
 
-    public BookBuilder buildAuthors(String ... authors) {
+    public BookBuilder buildAuthors(String... authors) {
         this.authors = Arrays.asList(authors);
         return this;
     }

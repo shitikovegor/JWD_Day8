@@ -1,4 +1,4 @@
-package com.shitikov.task6.model.validator;
+package com.shitikov.task6.validator;
 
 import java.util.List;
 

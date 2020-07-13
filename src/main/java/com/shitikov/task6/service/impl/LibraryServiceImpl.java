@@ -1,20 +1,20 @@
-package com.shitikov.task6.model.service.impl;
+package com.shitikov.task6.service.impl;
 
 import com.shitikov.task6.model.builder.BookBuilder;
 import com.shitikov.task6.model.dao.BookListDAO;
 import com.shitikov.task6.model.entity.Book;
-import com.shitikov.task6.model.exception.ProjectException;
+import com.shitikov.task6.model.exception.BookDAOException;
 import com.shitikov.task6.model.factory.DAOFactory;
-import com.shitikov.task6.model.service.LibraryService;
-import com.shitikov.task6.model.validator.BookValidator;
+import com.shitikov.task6.service.LibraryService;
+import com.shitikov.task6.service.exception.LibraryServiceException;
+import com.shitikov.task6.validator.BookValidator;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 public class LibraryServiceImpl implements LibraryService {
     @Override
-    public void addBook(String name, List<String> authors, String publishingHouse, int pages) throws ProjectException {
+    public void addBook(String name, List<String> authors, String publishingHouse, int pages) throws LibraryServiceException {
         DAOFactory daoFactory = DAOFactory.getInstance();
         BookListDAO bookListDAO = daoFactory.getBookListDao();
         BookValidator validator = BookValidator.getInstance();
@@ -31,19 +31,29 @@ public class LibraryServiceImpl implements LibraryService {
                     .buildPublishingHouse(publishingHouse)
                     .buildPages(pages)
                     .buildBook();
-
-            bookListDAO.addBook(book);
+            try {
+                bookListDAO.addBook(book);
+            } catch (BookDAOException e) {
+                String errorMessage = "Error of adding book. ";
+                throw new LibraryServiceException(errorMessage.concat(e.getMessage()));
+            }
         } else {
-            throw new ProjectException("Parameters are incorrect.");
+            throw new LibraryServiceException("Parameters are incorrect.");
         }
     }
 
     @Override
-    public void removeBook(Book book) throws ProjectException {
+    public void removeBook(Book book) throws LibraryServiceException {
         DAOFactory daoFactory = DAOFactory.getInstance();
         BookListDAO bookListDAO = daoFactory.getBookListDao();
 
-        bookListDAO.removeBook(book);
+        try {
+            bookListDAO.removeBook(book);
+        } catch (BookDAOException e) {
+            String errorMessage = "Error of removing book. ";
+            throw new LibraryServiceException(errorMessage.concat(e.getMessage()));
+        }
+
     }
 
     @Override
@@ -55,63 +65,54 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
-    public List<Book> findByName(String name) {
+    public List<Book> findByName(String name) throws LibraryServiceException {
         DAOFactory daoFactory = DAOFactory.getInstance();
         BookListDAO bookListDAO = daoFactory.getBookListDao();
         BookValidator validator = BookValidator.getInstance();
 
-        List<Book> result = new ArrayList<>();
-
-        if (validator.nameIsCorrect(name)) {
-            result = bookListDAO.findByName(name);
+        if (!validator.nameIsCorrect(name)) {
+            throw new LibraryServiceException("Parameter is incorrect.");
         }
-
-        return result;
+        return bookListDAO.findByName(name);
     }
 
     @Override
-    public List<Book> findByAuthor(String author) {
+    public List<Book> findByAuthor(String author) throws LibraryServiceException {
         DAOFactory daoFactory = DAOFactory.getInstance();
         BookListDAO bookListDAO = daoFactory.getBookListDao();
         BookValidator validator = BookValidator.getInstance();
 
-        List<Book> result = new ArrayList<>();
-
-        if (validator.authorIsCorrect(author)) {
-            result = bookListDAO.findByAuthor(author);
+        if (!validator.authorIsCorrect(author)) {
+            throw new LibraryServiceException("Parameter is incorrect.");
         }
 
-        return result;
+        return bookListDAO.findByAuthor(author);
     }
 
     @Override
-    public List<Book> findByPublishingHouse(String publishingHouse) {
+    public List<Book> findByPublishingHouse(String publishingHouse) throws LibraryServiceException {
         DAOFactory daoFactory = DAOFactory.getInstance();
         BookListDAO bookListDAO = daoFactory.getBookListDao();
         BookValidator validator = BookValidator.getInstance();
 
-        List<Book> result = new ArrayList<>();
-
-        if (validator.publishingHouseIsCorrect(publishingHouse)) {
-            result = bookListDAO.findByPublishingHouse(publishingHouse);
+        if (!validator.publishingHouseIsCorrect(publishingHouse)) {
+            throw new LibraryServiceException("Parameter is incorrect.");
         }
 
-        return result;
+        return bookListDAO.findByPublishingHouse(publishingHouse);
     }
 
     @Override
-    public List<Book> findByPages(int pages) {
+    public List<Book> findByPages(int pages) throws LibraryServiceException {
         DAOFactory daoFactory = DAOFactory.getInstance();
         BookListDAO bookListDAO = daoFactory.getBookListDao();
         BookValidator validator = BookValidator.getInstance();
 
-        List<Book> result = new ArrayList<>();
-
-        if (validator.pagesAreCorrect(pages)) {
-            result = bookListDAO.findByPages(pages);
+        if (!validator.pagesAreCorrect(pages)) {
+            throw new LibraryServiceException("Parameter is incorrect.");
         }
 
-        return result;
+        return bookListDAO.findByPages(pages);
     }
 
     @Override

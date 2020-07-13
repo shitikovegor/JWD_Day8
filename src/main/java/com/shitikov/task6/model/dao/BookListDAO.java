@@ -1,15 +1,15 @@
 package com.shitikov.task6.model.dao;
 
 import com.shitikov.task6.model.entity.Book;
-import com.shitikov.task6.model.exception.ProjectException;
+import com.shitikov.task6.model.exception.BookDAOException;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface BookListDAO {
-    void addBook(Book book) throws ProjectException;
+    void addBook(Book book) throws BookDAOException;
 
-    void removeBook(Book book) throws ProjectException;
+    void removeBook(Book book) throws BookDAOException;
 
     Optional<Book> findById(String id);
 

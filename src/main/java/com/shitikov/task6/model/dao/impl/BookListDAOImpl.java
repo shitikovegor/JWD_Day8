@@ -3,7 +3,7 @@ package com.shitikov.task6.model.dao.impl;
 import com.shitikov.task6.model.dao.BookListDAO;
 import com.shitikov.task6.model.entity.Book;
 import com.shitikov.task6.model.entity.Library;
-import com.shitikov.task6.model.exception.ProjectException;
+import com.shitikov.task6.model.exception.BookDAOException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -11,13 +11,28 @@ import java.util.stream.Collectors;
 public class BookListDAOImpl implements BookListDAO {
 
     @Override
-    public void addBook(Book book) throws ProjectException {
-        Library.getInstance().add(book);
+    public void addBook(Book book) throws BookDAOException {
+        Library library = Library.getInstance();
+        if (book == null) {
+            throw new BookDAOException("Book is null.");
+        }
+        if (library.size() == library.getMaxCapacity()) {
+            throw new BookDAOException("No library space.");
+        }
+        if (library.contains(book)) {
+            throw new BookDAOException("Book exists in library.");
+        }
+        library.add(book);
     }
 
     @Override
-    public void removeBook(Book book) throws ProjectException {
-        Library.getInstance().remove(book);
+    public void removeBook(Book book) throws BookDAOException {
+    Library library = Library.getInstance();
+        if (!library.contains(book)) {
+            throw new BookDAOException("Book doesn't exist in library.");
+        }
+
+        library.remove(book);
     }
 
     @Override
@@ -113,9 +128,7 @@ public class BookListDAOImpl implements BookListDAO {
 
     private List<Book> fillFromLibrary() {
         List<Book> unmodList = Library.getInstance().getBooks();
-        List<Book> books = new ArrayList<>(unmodList);
-
-        return books;
+        return new ArrayList<>(unmodList);
     }
 
     @Override

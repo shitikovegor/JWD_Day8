@@ -4,7 +4,7 @@ import com.shitikov.task6.model.builder.BookBuilder;
 
 import java.util.*;
 
-import static com.shitikov.task6.model.util.IdGenerator.generateId;
+import static com.shitikov.task6.util.IdGenerator.generateId;
 
 public class Book {
     private String id;
@@ -49,8 +49,7 @@ public class Book {
     }
 
     public List<String> getAuthors() {
-        List<String> copy = copy = Collections.unmodifiableList(authors);
-        return copy;
+        return Collections.unmodifiableList(authors);
     }
 
     public void setAuthors(List<String> authors) {
@@ -92,7 +91,7 @@ public class Book {
         if (publishingHouse != null ? !publishingHouse.equals(other.publishingHouse) : other.publishingHouse != null) {
             return false;
         }
-        return id == other.id;
+        return id.equals(other.id);
     }
 
     @Override
