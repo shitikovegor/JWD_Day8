@@ -7,14 +7,14 @@ import java.util.*;
 import static com.shitikov.task6.util.IdGenerator.generateId;
 
 public class Book {
-    private String id;
+    private String bookId;
     private String name;
     private List<String> authors;
     private String publishingHouse;
     private int pages;
 
     public Book(BookBuilder bookBuilder) {
-        this.id = generateId();
+        this.bookId = generateId();
         this.name = bookBuilder.getName();
         this.authors = bookBuilder.getAuthors();
         this.publishingHouse = bookBuilder.getPublishingHouse();
@@ -22,22 +22,22 @@ public class Book {
     }
 
     public Book() {
-        this.id = generateId();
+        this.bookId = generateId();
         this.name = "";
         this.authors = new ArrayList<>();
         this.publishingHouse = "";
     }
 
     public Book(String name, List<String> authors, String publishingHouse, int pages) {
-        this.id = generateId();
+        this.bookId = generateId();
         this.name = name;
         this.authors = authors;
         this.publishingHouse = publishingHouse;
         this.pages = pages;
     }
 
-    public String getId() {
-        return id;
+    public String getBookId() {
+        return bookId;
     }
 
     public String getName() {
@@ -91,13 +91,13 @@ public class Book {
         if (publishingHouse != null ? !publishingHouse.equals(other.publishingHouse) : other.publishingHouse != null) {
             return false;
         }
-        return id.equals(other.id);
+        return bookId.equals(other.bookId);
     }
 
     @Override
     public int hashCode() {
         int prime = 31;
-        int result = prime + (id != null ? id.hashCode() : 0);
+        int result = prime + (bookId != null ? bookId.hashCode() : 0);
         result = prime * result + (name != null ? name.hashCode() : 0);
         result = prime * result + (authors != null ? authors.hashCode() : 0);
         result = prime * result + (publishingHouse != null ? publishingHouse.hashCode() : 0);
@@ -108,7 +108,7 @@ public class Book {
     @Override
     public String toString() {
         return new StringJoiner(", ", Book.class.getSimpleName() + "[", "]")
-                .add("id=" + id)
+                .add("bookId=" + bookId)
                 .add("name='" + name + "'")
                 .add("authors=" + authors)
                 .add("publishingHouse='" + publishingHouse + "'")
@@ -135,7 +135,6 @@ public class Book {
                     return author1.compareTo(author2);
                 }
             }
-
             return 0;
         }
     }
@@ -143,7 +142,7 @@ public class Book {
     public static class IdComparator implements Comparator<Book> {
         @Override
         public int compare(Book book1, Book book2) {
-            return book1.getId().compareTo(book2.getId());
+            return book1.getBookId().compareTo(book2.getBookId());
         }
     }
 

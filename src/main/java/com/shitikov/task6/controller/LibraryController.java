@@ -8,6 +8,14 @@ import java.util.List;
 import java.util.Map;
 
 public class LibraryController {
+    private static LibraryController instance;
+
+    public static LibraryController getInstance() {
+        if (instance == null) {
+            instance = new LibraryController();
+        }
+        return instance;
+    }
 
     public Map<String, List<Book>> processRequest(String commandName, Map<String, String> parameters) {
         Map<String, List<Book>> response;

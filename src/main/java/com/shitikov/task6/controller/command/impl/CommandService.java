@@ -1,12 +1,11 @@
 package com.shitikov.task6.controller.command.impl;
 
-import com.shitikov.task6.controller.exception.ControllerException;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.shitikov.task6.controller.command.exception.CommandException;
 
 public class CommandService {
-    private static final String DELIMITER = ",";
+    static final String BAD_RESPONSE = "Something went wrong. ";
+    static final String FOUND_RESPONSE = "Books found";
+
     private static CommandService instance;
 
     private CommandService() {
@@ -19,26 +18,11 @@ public class CommandService {
         return instance;
     }
 
-    List<String> parseAuthors(String authors) throws ControllerException {
-        if (authors == null) {
-            throw new ControllerException("List of authors is null.");
-        }
-
-        List<String> result = new ArrayList<>();
-        String[] authorsForFill = authors.split(DELIMITER);
-
-        for (String author : authorsForFill) {
-            result.add(author.strip());
-        }
-
-        return result;
-    }
-
-    int parsePages(String pages) throws ControllerException {
+    int parsePages(String pages) throws CommandException {
         try {
             return Integer.parseInt(pages);
         } catch (NumberFormatException e) {
-            throw new ControllerException("Parameter is incorrect.");
+            throw new CommandException("Parameter is incorrect.");
         }
     }
 }

@@ -10,14 +10,14 @@ import java.util.List;
 import java.util.Map;
 
 public class FindAllCommand implements Command {
-    private static final String RESPONSE = "Found books";
+
     @Override
     public Map<String, List<Book>> execute(Map<String, String> parameters) {
         LibraryService libraryService = new LibraryServiceImpl();
         Map<String, List<Book>> response = new HashMap<>();
 
         List<Book> bookList = libraryService.findAll();
-        response.put(RESPONSE, bookList);
+        response.put(CommandService.FOUND_RESPONSE, bookList);
 
         return response;
     }

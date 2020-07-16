@@ -17,7 +17,7 @@ public class SortByNameCommand implements Command {
         LibraryService libraryService = new LibraryServiceImpl();
         Map<String, List<Book>> response = new HashMap<>();
 
-        List<Book> sortedBooks = libraryService.sortBooksByName();
+        List<Book> sortedBooks = libraryService.sortByName();
         response.put(RESPONSE, sortedBooks);
 
         return response;

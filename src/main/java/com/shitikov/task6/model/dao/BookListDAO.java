@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BookListDAO {
-    void addBook(Book book) throws BookDAOException;
+    void add(Book book) throws BookDAOException;
 
-    void removeBook(Book book) throws BookDAOException;
+    void remove(Book book) throws BookDAOException;
 
     Optional<Book> findById(String id);
 
@@ -21,15 +21,15 @@ public interface BookListDAO {
 
     List<Book> findByPages(int pages);
 
-    List<Book> sortBooksById();
+    List<Book> sortById();
 
-    List<Book> sortBooksByName();
+    List<Book> sortByName();
 
-    List<Book> sortBooksByAuthor();
+    List<Book> sortByAuthor();
 
-    List<Book> sortBooksByPublishingHouse();
+    List<Book> sortByPublishingHouse();
 
-    List<Book> sortBooksByPages();
+    List<Book> sortByPages();
 
     List<Book> findAll();
 }

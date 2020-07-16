@@ -17,7 +17,7 @@ public class SortByIdCommand implements Command {
         LibraryService libraryService = new LibraryServiceImpl();
         Map<String, List<Book>> response = new HashMap<>();
 
-        List<Book> sortedBooks = libraryService.sortBooksById();
+        List<Book> sortedBooks = libraryService.sortById();
         response.put(RESPONSE, sortedBooks);
 
         return response;

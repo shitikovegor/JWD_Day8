@@ -17,7 +17,7 @@ public class SortByPagesCommand implements Command {
         LibraryService libraryService = new LibraryServiceImpl();
         Map<String, List<Book>> response = new HashMap<>();
 
-        List<Book> sortedBooks = libraryService.sortBooksByPages();
+        List<Book> sortedBooks = libraryService.sortByPages();
         response.put(RESPONSE, sortedBooks);
 
         return response;

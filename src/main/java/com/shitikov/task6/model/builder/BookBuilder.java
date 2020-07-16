@@ -2,10 +2,11 @@ package com.shitikov.task6.model.builder;
 
 import com.shitikov.task6.model.entity.Book;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BookBuilder {
+    private static final String DELIMITER = ",";
     private String name;
     private List<String> authors;
     private String publishingHouse;
@@ -24,13 +25,8 @@ public class BookBuilder {
         return authors;
     }
 
-    public BookBuilder buildAuthors(String... authors) {
-        this.authors = Arrays.asList(authors);
-        return this;
-    }
-
-    public BookBuilder buildAuthors(List<String> authors) {
-        this.authors = authors;
+    public BookBuilder buildAuthors(String authors) {
+        this.authors = authorsToList(authors);
         return this;
     }
 
@@ -54,5 +50,16 @@ public class BookBuilder {
 
     public Book buildBook() {
         return new Book(this);
+    }
+
+    List<String> authorsToList(String authors) {
+
+        List<String> result = new ArrayList<>();
+        String[] authorsForFill = authors.split(DELIMITER);
+
+        for (String author : authorsForFill) {
+            result.add(author.strip());
+        }
+        return result;
     }
 }

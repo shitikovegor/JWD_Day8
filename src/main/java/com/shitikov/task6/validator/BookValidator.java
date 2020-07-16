@@ -1,16 +1,15 @@
 package com.shitikov.task6.validator;
 
-import java.util.List;
-
 public class BookValidator {
     private static final int MIN_PAGES_VALUE = 1;
     private static final int MAX_PAGES_VALUE = 10000;
     private static final int MIN_CHAR_NUMBER = 1;
-    private static final int MAX_CHAR_NUMBER = 1000;
+    private static final int MAX_CHAR_NUMBER = 150;
 
     private static BookValidator instance;
 
-    private BookValidator(){}
+    private BookValidator() {
+    }
 
     public static BookValidator getInstance() {
         if (instance == null) {
@@ -19,44 +18,32 @@ public class BookValidator {
         return instance;
     }
 
-    public boolean nameIsCorrect(String name) {
+    public boolean isNameCorrect(String name) {
         if (name == null) {
             return false;
         }
-        return stringParameterIsCorrect(name);
+        return isStringParameterCorrect(name);
     }
 
-    public boolean authorIsCorrect(String author) {
+    public boolean isAuthorCorrect(String author) {
         if (author == null) {
             return false;
         }
-        return stringParameterIsCorrect(author);
+        return isStringParameterCorrect(author);
     }
 
-    public boolean authorsAreCorrect(List<String> authors) {
-        if (authors == null) {
-            return false;
-        }
-        for (String author: authors) {
-            if (!authorIsCorrect(author)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean publishingHouseIsCorrect(String publishingHouse) {
+    public boolean isPublishingHouseCorrect(String publishingHouse) {
         if (publishingHouse == null) {
             return false;
         }
-        return stringParameterIsCorrect(publishingHouse);
+        return isStringParameterCorrect(publishingHouse);
     }
 
-    public boolean pagesAreCorrect(int pages) {
+    public boolean arePagesCorrect(int pages) {
         return pages >= MIN_PAGES_VALUE && pages <= MAX_PAGES_VALUE;
     }
 
-    private boolean stringParameterIsCorrect(String parameter) {
+    private boolean isStringParameterCorrect(String parameter) {
         String parameterWithoutSpaces = parameter.replace(" ", "");
         int length = parameterWithoutSpaces.length();
 

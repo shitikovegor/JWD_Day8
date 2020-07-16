@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class BookListDAOImpl implements BookListDAO {
 
     @Override
-    public void addBook(Book book) throws BookDAOException {
+    public void add(Book book) throws BookDAOException {
         Library library = Library.getInstance();
         if (book == null) {
             throw new BookDAOException("Book is null.");
@@ -26,7 +26,7 @@ public class BookListDAOImpl implements BookListDAO {
     }
 
     @Override
-    public void removeBook(Book book) throws BookDAOException {
+    public void remove(Book book) throws BookDAOException {
     Library library = Library.getInstance();
         if (!library.contains(book)) {
             throw new BookDAOException("Book doesn't exist in library.");
@@ -39,7 +39,7 @@ public class BookListDAOImpl implements BookListDAO {
     public Optional<Book> findById(String id) {
         List<Book> books = Library.getInstance().getBooks();
         for (Book book : books) {
-            if (book.getId().equals(id)) {
+            if (book.getBookId().equals(id)) {
                 return Optional.of(book);
             }
         }
@@ -92,35 +92,35 @@ public class BookListDAOImpl implements BookListDAO {
     }
 
     @Override
-    public List<Book> sortBooksById() {
+    public List<Book> sortById() {
         List<Book> books = fillFromLibrary();
         books.sort(new Book.IdComparator());
         return books;
     }
 
     @Override
-    public List<Book> sortBooksByName() {
+    public List<Book> sortByName() {
         List<Book> books = fillFromLibrary();
         books.sort(new Book.NameComparator());
         return books;
     }
 
     @Override
-    public List<Book> sortBooksByAuthor() {
+    public List<Book> sortByAuthor() {
         List<Book> books = fillFromLibrary();
         books.sort(new Book.AuthorComparator());
         return books;
     }
 
     @Override
-    public List<Book> sortBooksByPublishingHouse() {
+    public List<Book> sortByPublishingHouse() {
         List<Book> books = fillFromLibrary();
         books.sort(new Book.PublishingHouseComparator());
         return books;
     }
 
     @Override
-    public List<Book> sortBooksByPages() {
+    public List<Book> sortByPages() {
         List<Book> books = fillFromLibrary();
         books.sort(new Book.PagesComparator());
         return books;

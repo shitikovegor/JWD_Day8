@@ -7,29 +7,29 @@ import java.util.List;
 import java.util.Optional;
 
 public interface LibraryService {
-    void addBook(String name, List<String> authors, String publishingHouse, int pages) throws LibraryServiceException;
+    void add(String name, String authors, String publishingHouse, int pages) throws LibraryServiceException;
 
-    void removeBook(Book book) throws LibraryServiceException;
+    void remove(String name, String authors, String publishingHouse, int pages) throws LibraryServiceException;
 
     Optional<Book> findById(String id);
 
-    List<Book> findByName(String name) throws LibraryServiceException;
+    List<Book> findByName(String name);
 
-    List<Book> findByAuthor(String author) throws LibraryServiceException;
+    List<Book> findByAuthor(String author);
 
-    List<Book> findByPublishingHouse(String publishingHouse) throws LibraryServiceException;
+    List<Book> findByPublishingHouse(String publishingHouse);
 
-    List<Book> findByPages(int pages) throws LibraryServiceException;
+    List<Book> findByPages(int pages);
 
-    List<Book> sortBooksById();
+    List<Book> sortById();
 
-    List<Book> sortBooksByName();
+    List<Book> sortByName();
 
-    List<Book> sortBooksByAuthor();
+    List<Book> sortByAuthor();
 
-    List<Book> sortBooksByPublishingHouse();
+    List<Book> sortByPublishingHouse();
 
-    List<Book> sortBooksByPages();
+    List<Book> sortByPages();
 
     List<Book> findAll();
 }
