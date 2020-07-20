@@ -1,6 +1,7 @@
 package com.shitikov.task6.controller.command.impl;
 
 import com.shitikov.task6.controller.command.Command;
+import com.shitikov.task6.controller.command.type.CommandResponse;
 import com.shitikov.task6.model.entity.Book;
 import com.shitikov.task6.service.LibraryService;
 import com.shitikov.task6.service.impl.LibraryServiceImpl;
@@ -17,7 +18,7 @@ public class FindAllCommand implements Command {
         Map<String, List<Book>> response = new HashMap<>();
 
         List<Book> bookList = libraryService.findAll();
-        response.put(CommandService.FOUND_RESPONSE, bookList);
+        response.put(CommandResponse.FOUND_RESPONSE.getMessage(), bookList);
 
         return response;
     }

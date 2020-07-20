@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.StringJoiner;
 
 public class Library {
-    private static final int MAX_CAPACITY = 1000;
+    private static final int MAX_CAPACITY = 100;
     private static Library instance;
     private List<Book> books;
 
@@ -30,7 +30,23 @@ public class Library {
     }
 
     public void remove(Book book) {
-        books.remove(book);
+        int index = 0;
+        boolean bookRemoved = false;
+        while (index < books.size() && !bookRemoved) {
+            Book element = books.get(index);
+            if (book.getName().equals(element.getName())
+                    && book.getAuthors().equals(element.getAuthors())
+                    && book.getPublishingHouse().equals(element.getPublishingHouse())
+                    && book.getPages() == element.getPages()) {
+                books.remove(element);
+                bookRemoved = true;
+            }
+            index++;
+        }
+    }
+
+    public void removeAll() {
+        books.clear();
     }
 
     public int size() {
@@ -42,7 +58,15 @@ public class Library {
     }
 
     public boolean contains(Book book) {
-        return books.contains(book);
+        for (Book element : books) {
+            if (book.getName().equals(element.getName())
+            && book.getAuthors().equals(element.getAuthors())
+            && book.getPublishingHouse().equals(element.getPublishingHouse())
+            && book.getPages() == element.getPages()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

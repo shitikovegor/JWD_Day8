@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test name = "not group test">
+        <classes>
+            <class name="com.shitikov.task6.service.impl.LibraryServiceImplTest">
+                <methods>
+                    <include name="testFindById"/>
+                    <include name="testFindByName"/>
+                    <include name="testFindByAuthor"/>
+                    <include name="testFindByPublishingHouse"/>
+                    <include name="testFindByPages"/>
+                    <include name="testSortById"/>
+                    <include name="testSortByName"/>
+                    <include name="testSortByAuthor"/>
+                    <include name="testSortByPublishingHouse"/>
+                    <include name="testSortByPages"/>
+                    <include name="findAll"/>
+                </methods>
+            </class>
+            <class name="com.shitikov.task6.model.dao.impl.BookListDAOImplTest">
+                <methods>
+                    <include name="testFindById"/>
+                    <include name="testFindByName"/>
+                    <include name="testFindByAuthor"/>
+                    <include name="testFindByPublishingHouse"/>
+                    <include name="testFindByPages"/>
+                    <include name="testSortById"/>
+                    <include name="testSortByName"/>
+                    <include name="testSortByAuthor"/>
+                    <include name="testSortByPublishingHouse"/>
+                    <include name="testSortByPages"/>
+                    <include name="findAll"/>
+                </methods>
+            </class>
+            <class name="com.shitikov.task6.validator.BookValidatorTest"/>
+            <class name="com.shitikov.task6.controller.command.impl.FindAllCommandTest"/>
+            <class name="com.shitikov.task6.controller.command.impl.FindByAuthorCommandTest"/>
+            <class name="com.shitikov.task6.controller.command.impl.FindByIdCommandTest"/>
+            <class name="com.shitikov.task6.controller.command.impl.FindByNameCommandTest"/>
+            <class name="com.shitikov.task6.controller.command.impl.FindByPagesCommandTest"/>
+            <class name="com.shitikov.task6.controller.command.impl.FindByPublishingHouseCommandTest"/>
+            <class name="com.shitikov.task6.controller.command.impl.SortByAuthorCommandTest"/>
+            <class name="com.shitikov.task6.controller.command.impl.SortByIdCommandTest"/>
+            <class name="com.shitikov.task6.controller.command.impl.SortByNameCommandTest"/>
+            <class name="com.shitikov.task6.controller.command.impl.SortByPagesCommandTest"/>
+            <class name="com.shitikov.task6.controller.command.impl.SortByPagesCommandTest"/>
+            <class name="com.shitikov.task6.controller.LibraryControllerTest"/>
+            <class name="com.shitikov.task6.controller.command.provider.CommandProviderTest"/>
+        </classes>
+    </test>
+</suite>

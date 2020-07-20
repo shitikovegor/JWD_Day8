@@ -1,6 +1,7 @@
 package com.shitikov.task6.controller.command.impl;
 
 import com.shitikov.task6.controller.command.Command;
+import com.shitikov.task6.controller.command.type.CommandResponse;
 import com.shitikov.task6.controller.command.type.KeyType;
 import com.shitikov.task6.model.entity.Book;
 import com.shitikov.task6.service.LibraryService;
@@ -20,7 +21,7 @@ public class FindByPublishingHouseCommand implements Command {
         if (parameters.containsKey(KeyType.PUBLISHING_HOUSE.getName())) {
             String publishingHouse = parameters.get("publishingHouse");
             List<Book> foundBooks = libraryService.findByPublishingHouse(publishingHouse);
-            response.put(CommandService.FOUND_RESPONSE, foundBooks);
+            response.put(CommandResponse.FOUND_RESPONSE.getMessage(), foundBooks);
         }
 
         return response;

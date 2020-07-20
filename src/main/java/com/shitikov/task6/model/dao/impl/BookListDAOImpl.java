@@ -27,7 +27,7 @@ public class BookListDAOImpl implements BookListDAO {
 
     @Override
     public void remove(Book book) throws BookDAOException {
-    Library library = Library.getInstance();
+        Library library = Library.getInstance();
         if (!library.contains(book)) {
             throw new BookDAOException("Book doesn't exist in library.");
         }

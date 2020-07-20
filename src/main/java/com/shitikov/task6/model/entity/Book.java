@@ -36,6 +36,10 @@ public class Book {
         this.pages = pages;
     }
 
+    public void setBookId(String bookId) {
+        this.bookId = bookId;
+    }
+
     public String getBookId() {
         return bookId;
     }
@@ -119,11 +123,14 @@ public class Book {
     public static class AuthorComparator implements Comparator<Book> {
         @Override
         public int compare(Book book1, Book book2) {
-            List<String> authors1 = book1.getAuthors();
-            List<String> authors2 = book2.getAuthors();
+            List<String> unmodAuthors1 = book1.getAuthors();
+            List<String> unmodAuthors2 = book2.getAuthors();
+
+            List<String> authors1 = new ArrayList<>(unmodAuthors1);
+            List<String> authors2 = new ArrayList<>(unmodAuthors2);
 
             Collections.sort(authors1);
-            Collections.sort(authors1);
+            Collections.sort(authors2);
 
             Iterator<String> it1 = authors1.iterator();
             Iterator<String> it2 = authors2.iterator();

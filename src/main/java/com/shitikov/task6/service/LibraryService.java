@@ -7,9 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface LibraryService {
-    void add(String name, String authors, String publishingHouse, int pages) throws LibraryServiceException;
+    void add(String name, String authors, String publishingHouse, String pages) throws LibraryServiceException;
 
-    void remove(String name, String authors, String publishingHouse, int pages) throws LibraryServiceException;
+    void remove(String name, String authors, String publishingHouse, String pages) throws LibraryServiceException;
 
     Optional<Book> findById(String id);
 
@@ -19,7 +19,7 @@ public interface LibraryService {
 
     List<Book> findByPublishingHouse(String publishingHouse);
 
-    List<Book> findByPages(int pages);
+    List<Book> findByPages(String pages);
 
     List<Book> sortById();
 

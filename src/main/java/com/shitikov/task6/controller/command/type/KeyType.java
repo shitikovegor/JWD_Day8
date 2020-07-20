@@ -5,10 +5,10 @@ public enum KeyType {
     ID("id"),
     NAME("name"),
     AUTHOR("author"),
-    PUBLISHING_HOUSE("publishinHouse"),
+    PUBLISHING_HOUSE("publishingHouse"),
     PAGES("pages");
 
-    String name;
+    private String name;
 
     KeyType(String name) {
         this.name = name;

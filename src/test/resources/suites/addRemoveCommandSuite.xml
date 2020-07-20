@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Add and Remove methods Command Suite">
+    <groups>
+        <run>
+            <include name="addRemoveBookCommand" />
+        </run>
+    </groups>
+
+    <test name = "addRemoveCommandSuite">
+        <classes>
+            <class name="com.shitikov.task6.controller.command.impl.AddBookCommandTest"/>
+            <class name="com.shitikov.task6.controller.command.impl.RemoveBookCommandTest"/>
+        </classes>
+    </test>
+</suite>

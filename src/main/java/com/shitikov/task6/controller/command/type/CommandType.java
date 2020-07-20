@@ -17,10 +17,10 @@ public enum CommandType {
     SORT_BY_PUBLISHING_HOUSE("sort by publishing house", new SortByPublishingHouseCommand()),
     SORT_BY_PAGES("sort by pages", new SortByPagesCommand()),
     FIND_ALL("find all", new FindAllCommand()),
-    EMPTY_COMMAND("find all", new EmptyCommand());
+    EMPTY_COMMAND("empty command", new EmptyCommand());
 
-    String name;
-    Command command;
+    private String name;
+    private Command command;
 
     CommandType(String name, Command command) {
         this.name = name;

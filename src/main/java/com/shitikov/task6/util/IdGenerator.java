@@ -1,14 +1,13 @@
 package com.shitikov.task6.util;
 
-import java.util.UUID;
-
 public class IdGenerator {
+    private static int id = 0;
 
     private IdGenerator() {
     }
 
     public static String generateId() {
-        UUID newId = UUID.randomUUID();
-        return newId.toString();
+        id++;
+        return String.valueOf(id);
     }
 }

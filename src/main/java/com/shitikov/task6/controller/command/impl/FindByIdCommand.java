@@ -1,6 +1,7 @@
 package com.shitikov.task6.controller.command.impl;
 
 import com.shitikov.task6.controller.command.Command;
+import com.shitikov.task6.controller.command.type.CommandResponse;
 import com.shitikov.task6.controller.command.type.KeyType;
 import com.shitikov.task6.model.entity.Book;
 import com.shitikov.task6.service.LibraryService;
@@ -9,7 +10,6 @@ import com.shitikov.task6.service.impl.LibraryServiceImpl;
 import java.util.*;
 
 public class FindByIdCommand implements Command {
-    private static final String BOOK_NOT_FOUND_RESPONSE = "Book didn't find";
 
     @Override
     public Map<String, List<Book>> execute(Map<String, String> parameters) {
@@ -23,9 +23,9 @@ public class FindByIdCommand implements Command {
             if (foundBook.isPresent()) {
                 List<Book> foundBooks = new ArrayList<>();
                 foundBooks.add(foundBook.get());
-                response.put(CommandService.FOUND_RESPONSE, foundBooks);
+                response.put(CommandResponse.FOUND_RESPONSE.getMessage(), foundBooks);
             } else {
-                response.put(BOOK_NOT_FOUND_RESPONSE, new ArrayList<>());
+                response.put(CommandResponse.BOOK_NOT_FOUND_RESPONSE.getMessage(), new ArrayList<>());
             }
         }
         return response;

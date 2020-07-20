@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Add and Remove methods DAO Suite">
+    <groups>
+        <run>
+            <include name="addRemoveBookDao" />
+        </run>
+    </groups>
+
+    <test name = "addRemoveDAOSuite">
+        <classes>
+            <class name="com.shitikov.task6.model.dao.impl.BookListDAOImplTest"/>
+        </classes>
+    </test>
+</suite>

@@ -15,22 +15,23 @@ import java.util.Optional;
 
 public class LibraryServiceImpl implements LibraryService {
     @Override
-    public void add(String name, String authors, String publishingHouse, int pages) throws LibraryServiceException {
+    public void add(String name, String authors, String publishingHouse, String pages) throws LibraryServiceException {
         DAOFactory daoFactory = DAOFactory.getInstance();
         BookListDAO bookListDAO = daoFactory.getBookListDao();
         BookValidator validator = BookValidator.getInstance();
 
+        int pagesNumber = parsePages(pages);
         boolean parametersAreCorrect = validator.isNameCorrect(name) &&
                 validator.isAuthorCorrect(authors) &&
                 validator.isPublishingHouseCorrect(publishingHouse) &&
-                validator.arePagesCorrect(pages);
+                validator.arePagesCorrect(pagesNumber);
 
         if (parametersAreCorrect) {
             Book book = new BookBuilder()
                     .buildName(name)
                     .buildAuthors(authors)
                     .buildPublishingHouse(publishingHouse)
-                    .buildPages(pages)
+                    .buildPages(pagesNumber)
                     .buildBook();
             try {
                 bookListDAO.add(book);
@@ -44,22 +45,24 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
-    public void remove(String name, String authors, String publishingHouse, int pages) throws LibraryServiceException {
+    public void remove(String name, String authors, String publishingHouse, String pages) throws LibraryServiceException {
         DAOFactory daoFactory = DAOFactory.getInstance();
         BookListDAO bookListDAO = daoFactory.getBookListDao();
         BookValidator validator = BookValidator.getInstance();
 
+        int pagesNumber = parsePages(pages);
+
         boolean parametersAreCorrect = validator.isNameCorrect(name) &&
                 validator.isAuthorCorrect(authors) &&
                 validator.isPublishingHouseCorrect(publishingHouse) &&
-                validator.arePagesCorrect(pages);
+                validator.arePagesCorrect(pagesNumber);
 
         if (parametersAreCorrect) {
             Book book = new BookBuilder()
                     .buildName(name)
                     .buildAuthors(authors)
                     .buildPublishingHouse(publishingHouse)
-                    .buildPages(pages)
+                    .buildPages(pagesNumber)
                     .buildBook();
             try {
                 bookListDAO.remove(book);
@@ -122,17 +125,22 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
     @Override
-    public List<Book> findByPages(int pages) {
+    public List<Book> findByPages(String pages) {
         DAOFactory daoFactory = DAOFactory.getInstance();
         BookListDAO bookListDAO = daoFactory.getBookListDao();
         BookValidator validator = BookValidator.getInstance();
 
         List<Book> foundBooks = new ArrayList<>();
 
-        if (validator.arePagesCorrect(pages)) {
-            foundBooks = bookListDAO.findByPages(pages);
+        try {
+            int pagesNumber = parsePages(pages);
+            if (validator.arePagesCorrect(pagesNumber)) {
+                foundBooks = bookListDAO.findByPages(pagesNumber);
+            }
+            return foundBooks;
+        } catch (LibraryServiceException e) {
+            return foundBooks;
         }
-        return foundBooks;
     }
 
     @Override
@@ -181,5 +189,13 @@ public class LibraryServiceImpl implements LibraryService {
         BookListDAO bookListDAO = daoFactory.getBookListDao();
 
         return bookListDAO.findAll();
+    }
+
+    private int parsePages(String pages) throws LibraryServiceException {
+        try {
+            return Integer.parseInt(pages);
+        } catch (NumberFormatException e) {
+            throw new LibraryServiceException("Parameter is incorrect.");
+        }
     }
 }

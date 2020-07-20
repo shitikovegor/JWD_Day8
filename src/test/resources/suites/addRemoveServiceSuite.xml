@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Add and Remove methods Service Suite">
+    <groups>
+        <run>
+            <include name="addRemoveBookService" />
+        </run>
+    </groups>
+
+    <test name = "addRemoveServiceSuite">
+        <classes>
+            <class name="com.shitikov.task6.service.impl.LibraryServiceImplTest"/>
+        </classes>
+    </test>
+</suite>

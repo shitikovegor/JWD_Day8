@@ -1,6 +1,7 @@
 package com.shitikov.task6.controller.command.impl;
 
 import com.shitikov.task6.controller.command.Command;
+import com.shitikov.task6.controller.command.type.CommandResponse;
 import com.shitikov.task6.model.entity.Book;
 import com.shitikov.task6.service.LibraryService;
 import com.shitikov.task6.service.impl.LibraryServiceImpl;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class SortByIdCommand implements Command {
-    private static final String RESPONSE = "Books sorted by ID";
+    private static final String SORT_TYPE = "by ID";
 
     @Override
     public Map<String, List<Book>> execute(Map<String, String> parameters) {
@@ -18,7 +19,7 @@ public class SortByIdCommand implements Command {
         Map<String, List<Book>> response = new HashMap<>();
 
         List<Book> sortedBooks = libraryService.sortById();
-        response.put(RESPONSE, sortedBooks);
+        response.put(CommandResponse.SORT_RESPONSE.getMessage().concat(SORT_TYPE), sortedBooks);
 
         return response;
     }
