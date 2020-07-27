@@ -5,6 +5,8 @@ public class BookValidator {
     private static final int MAX_PAGES_VALUE = 10000;
     private static final int MIN_CHAR_NUMBER = 1;
     private static final int MAX_CHAR_NUMBER = 150;
+    private static final int MIN_ID_NUMBER = 1;
+    private static final int MAX_ID_NUMBER = 100;
 
     private static BookValidator instance;
 
@@ -39,11 +41,28 @@ public class BookValidator {
         return isStringParameterCorrect(publishingHouse);
     }
 
-    public boolean arePagesCorrect(int pages) {
-        return pages >= MIN_PAGES_VALUE && pages <= MAX_PAGES_VALUE;
+    public boolean arePagesCorrect(String pages) {
+        try {
+            int pagesNumber = Integer.parseInt(pages);
+            return pagesNumber >= MIN_PAGES_VALUE && pagesNumber <= MAX_PAGES_VALUE;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
-    private boolean isStringParameterCorrect(String parameter) {
+    public boolean isIdCorrect(String id) {
+        try {
+            int idNumber = Integer.parseInt(id);
+            return idNumber >= MIN_ID_NUMBER && idNumber <= MAX_ID_NUMBER;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    public boolean isStringParameterCorrect(String parameter) {
+        if (parameter == null) {
+            return false;
+        }
         String parameterWithoutSpaces = parameter.replace(" ", "");
         int length = parameterWithoutSpaces.length();
 

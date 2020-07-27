@@ -1,4 +1,4 @@
-package com.shitikov.task8.service.exception;
+package com.shitikov.task8.model.exception;
 
 public class LibraryServiceException extends Exception{
     public LibraryServiceException() {

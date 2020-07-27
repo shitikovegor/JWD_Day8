@@ -2,10 +2,10 @@ package com.shitikov.task8.controller.command.impl;
 
 import com.shitikov.task8.controller.command.Command;
 import com.shitikov.task8.controller.command.type.CommandResponse;
-import com.shitikov.task8.controller.command.type.KeyType;
+import com.shitikov.task8.util.KeyType;
 import com.shitikov.task8.model.entity.Book;
-import com.shitikov.task8.service.LibraryService;
-import com.shitikov.task8.service.impl.LibraryServiceImpl;
+import com.shitikov.task8.model.service.LibraryService;
+import com.shitikov.task8.model.service.impl.LibraryServiceImpl;
 
 import java.util.*;
 

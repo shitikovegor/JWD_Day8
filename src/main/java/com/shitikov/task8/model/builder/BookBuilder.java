@@ -7,17 +7,17 @@ import java.util.List;
 
 public class BookBuilder {
     private static final String DELIMITER = ",";
-    private String bookId;
+    private int bookId;
     private String name;
     private List<String> authors;
     private String publishingHouse;
     private int pages;
 
-    public String getBookId() {
+    public int getBookId() {
         return bookId;
     }
 
-    public BookBuilder buildBookId(String bookId) {
+    public BookBuilder buildBookId(int bookId) {
         this.bookId = bookId;
         return this;
     }

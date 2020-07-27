@@ -3,8 +3,9 @@ package com.shitikov.task8.controller.command.impl;
 import com.shitikov.task8.controller.command.Command;
 import com.shitikov.task8.controller.command.type.CommandResponse;
 import com.shitikov.task8.model.entity.Book;
-import com.shitikov.task8.service.LibraryService;
-import com.shitikov.task8.service.impl.LibraryServiceImpl;
+import com.shitikov.task8.model.service.LibraryService;
+import com.shitikov.task8.model.exception.LibraryServiceException;
+import com.shitikov.task8.model.service.impl.LibraryServiceImpl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +19,12 @@ public class SortByIdCommand implements Command {
         LibraryService libraryService = new LibraryServiceImpl();
         Map<String, List<Book>> response = new HashMap<>();
 
-        List<Book> sortedBooks = libraryService.sortById();
+        List<Book> sortedBooks = null;
+        try {
+            sortedBooks = libraryService.sortById();
+        } catch (LibraryServiceException e) {
+            response.put(CommandResponse.SORT_RESPONSE.getMessage().concat(SORT_TYPE), sortedBooks);
+        }
         response.put(CommandResponse.SORT_RESPONSE.getMessage().concat(SORT_TYPE), sortedBooks);
 
         return response;

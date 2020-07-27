@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.StringJoiner;
 
-public class Library {
+public class Library extends Entity {
     private static final int MAX_CAPACITY = 100;
     private static Library instance;
     private List<Book> books;

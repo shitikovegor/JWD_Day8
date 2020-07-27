@@ -6,7 +6,7 @@ public enum CommandResponse {
     NOT_EXIST_RESPONSE ("Book doesn't exist in library"),
     FOUND_RESPONSE ("Books found"),
     BOOK_NOT_FOUND_RESPONSE("Book not found"),
-    SORT_RESPONSE ("Books sorted "),
+    SORT_RESPONSE ("Books sorted by "),
     BAD_RESPONSE ("Something went wrong. ");
 
     private String message;

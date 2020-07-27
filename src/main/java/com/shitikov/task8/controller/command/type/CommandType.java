@@ -6,6 +6,7 @@ import com.shitikov.task8.controller.command.impl.*;
 public enum CommandType {
     ADD_BOOK("add book", new AddBookCommand()),
     REMOVE_BOOK("remove book", new RemoveBookCommand()),
+    REMOVE_BOOK_BY_ID("remove book by ID", new RemoveBookByIdCommand()),
     FIND_BY_ID("find by id", new FindByIdCommand()),
     FIND_BY_NAME("find by name", new FindByNameCommand()),
     FIND_BY_AUTHOR("find by author", new FindByAuthorCommand()),

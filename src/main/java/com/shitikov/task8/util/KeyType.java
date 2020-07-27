@@ -1,4 +1,4 @@
-package com.shitikov.task8.controller.command.type;
+package com.shitikov.task8.util;
 
 public enum KeyType {
 

@@ -6,15 +6,15 @@ import java.util.*;
 
 import static com.shitikov.task8.util.IdGenerator.generateId;
 
-public class Book {
-    private String bookId;
+public class Book extends Entity {
+    private int bookId;
     private String name;
     private List<String> authors;
     private String publishingHouse;
     private int pages;
 
     public Book(BookBuilder bookBuilder) {
-        this.bookId = generateId();
+        this.bookId = bookBuilder.getBookId();
         this.name = bookBuilder.getName();
         this.authors = bookBuilder.getAuthors();
         this.publishingHouse = bookBuilder.getPublishingHouse();
@@ -28,19 +28,19 @@ public class Book {
         this.publishingHouse = "";
     }
 
-    public Book(String name, List<String> authors, String publishingHouse, int pages) {
-        this.bookId = generateId();
+    public Book(int bookId, String name, List<String> authors, String publishingHouse, int pages) {
+        this.bookId = bookId;
         this.name = name;
         this.authors = authors;
         this.publishingHouse = publishingHouse;
         this.pages = pages;
     }
 
-    public void setBookId(String bookId) {
+    public void setBookId(int bookId) {
         this.bookId = bookId;
     }
 
-    public String getBookId() {
+    public int getBookId() {
         return bookId;
     }
 
@@ -95,13 +95,13 @@ public class Book {
         if (publishingHouse != null ? !publishingHouse.equals(other.publishingHouse) : other.publishingHouse != null) {
             return false;
         }
-        return bookId.equals(other.bookId);
+        return bookId == other.bookId;
     }
 
     @Override
     public int hashCode() {
         int prime = 31;
-        int result = prime + (bookId != null ? bookId.hashCode() : 0);
+        int result = prime + bookId;
         result = prime * result + (name != null ? name.hashCode() : 0);
         result = prime * result + (authors != null ? authors.hashCode() : 0);
         result = prime * result + (publishingHouse != null ? publishingHouse.hashCode() : 0);
@@ -149,7 +149,13 @@ public class Book {
     public static class IdComparator implements Comparator<Book> {
         @Override
         public int compare(Book book1, Book book2) {
-            return book1.getBookId().compareTo(book2.getBookId());
+            int bookId1 = book1.getBookId();
+            int bookId2 = book2.getBookId();
+
+            if (bookId1 == bookId2) {
+                return 0;
+            }
+            return bookId1 > bookId2 ? 1 : -1;
         }
     }
 

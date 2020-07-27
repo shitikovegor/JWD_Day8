@@ -6,8 +6,8 @@ public class IdGenerator {
     private IdGenerator() {
     }
 
-    public static String generateId() {
+    public static int generateId() {
         id++;
-        return String.valueOf(id);
+        return id;
     }
 }
