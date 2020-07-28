@@ -9,7 +9,7 @@
 
     <test name = "addRemoveDAOSuite">
         <classes>
-            <class name="com.shitikov.task6.model.dao.impl.BookListDAOImplTest"/>
+            <class name="com.shitikov.task8.model.dao.impl.BookListDaoImplTest"/>
         </classes>
     </test>
 </suite>

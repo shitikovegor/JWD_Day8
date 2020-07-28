@@ -9,7 +9,7 @@
 
     <test name = "addRemoveServiceSuite">
         <classes>
-            <class name="com.shitikov.task6.service.impl.LibraryServiceImplTest"/>
+            <class name="com.shitikov.task8.service.impl.LibraryServiceImplTest"/>
         </classes>
     </test>
 </suite>

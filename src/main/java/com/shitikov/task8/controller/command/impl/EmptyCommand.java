@@ -15,7 +15,6 @@ public class EmptyCommand implements Command {
     public Map<String, List<Book>> execute(Map<String, String> parameters) {
         Map<String, List<Book>> response = new HashMap<>();
         response.put(CommandResponse.BAD_RESPONSE.getMessage(), new ArrayList<>());
-
         return response;
     }
 }

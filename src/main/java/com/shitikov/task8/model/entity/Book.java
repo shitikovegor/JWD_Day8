@@ -4,9 +4,9 @@ import com.shitikov.task8.model.builder.BookBuilder;
 
 import java.util.*;
 
-import static com.shitikov.task8.util.IdGenerator.generateId;
-
 public class Book extends Entity {
+    private static final String AUTHOR_DELIMITER = ", ";
+
     private int bookId;
     private String name;
     private List<String> authors;
@@ -19,13 +19,6 @@ public class Book extends Entity {
         this.authors = bookBuilder.getAuthors();
         this.publishingHouse = bookBuilder.getPublishingHouse();
         this.pages = bookBuilder.getPages();
-    }
-
-    public Book() {
-        this.bookId = generateId();
-        this.name = "";
-        this.authors = new ArrayList<>();
-        this.publishingHouse = "";
     }
 
     public Book(int bookId, String name, List<String> authors, String publishingHouse, int pages) {
@@ -54,6 +47,20 @@ public class Book extends Entity {
 
     public List<String> getAuthors() {
         return Collections.unmodifiableList(authors);
+    }
+
+    public String getAuthorsAsString() {
+        StringBuilder result = new StringBuilder();
+        if (authors.size() == 1) {
+            result.append(authors.get(0));
+        } else {
+            for (int i = 0; i < authors.size() - 1; i++) {
+                result.append(authors.get(i));
+                result.append(AUTHOR_DELIMITER);
+            }
+            result.append(authors.get(authors.size() - 1));
+        }
+        return result.toString();
     }
 
     public void setAuthors(List<String> authors) {
@@ -118,71 +125,5 @@ public class Book extends Entity {
                 .add("publishingHouse='" + publishingHouse + "'")
                 .add("pages=" + pages)
                 .toString();
-    }
-
-    public static class AuthorComparator implements Comparator<Book> {
-        @Override
-        public int compare(Book book1, Book book2) {
-            List<String> unmodAuthors1 = book1.getAuthors();
-            List<String> unmodAuthors2 = book2.getAuthors();
-
-            List<String> authors1 = new ArrayList<>(unmodAuthors1);
-            List<String> authors2 = new ArrayList<>(unmodAuthors2);
-
-            Collections.sort(authors1);
-            Collections.sort(authors2);
-
-            Iterator<String> it1 = authors1.iterator();
-            Iterator<String> it2 = authors2.iterator();
-
-            while (it1.hasNext()) {
-                String author1 = it1.next();
-                String author2 = it2.next();
-                if (author1.compareTo(author2) != 0) {
-                    return author1.compareTo(author2);
-                }
-            }
-            return 0;
-        }
-    }
-
-    public static class IdComparator implements Comparator<Book> {
-        @Override
-        public int compare(Book book1, Book book2) {
-            int bookId1 = book1.getBookId();
-            int bookId2 = book2.getBookId();
-
-            if (bookId1 == bookId2) {
-                return 0;
-            }
-            return bookId1 > bookId2 ? 1 : -1;
-        }
-    }
-
-    public static class NameComparator implements Comparator<Book> {
-        @Override
-        public int compare(Book book1, Book book2) {
-            return book1.getName().compareTo(book2.getName());
-        }
-    }
-
-    public static class PagesComparator implements Comparator<Book> {
-        @Override
-        public int compare(Book book1, Book book2) {
-            int pages1 = book1.getPages();
-            int pages2 = book2.getPages();
-
-            if (pages1 == pages2) {
-                return 0;
-            }
-            return pages1 > pages2 ? 1 : -1;
-        }
-    }
-
-    public static class PublishingHouseComparator implements Comparator<Book> {
-        @Override
-        public int compare(Book book1, Book book2) {
-            return book1.getPublishingHouse().compareTo(book2.getPublishingHouse());
-        }
     }
 }

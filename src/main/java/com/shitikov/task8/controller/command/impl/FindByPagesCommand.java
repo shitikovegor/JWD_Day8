@@ -2,10 +2,10 @@ package com.shitikov.task8.controller.command.impl;
 
 import com.shitikov.task8.controller.command.Command;
 import com.shitikov.task8.controller.command.type.CommandResponse;
-import com.shitikov.task8.util.KeyType;
 import com.shitikov.task8.model.entity.Book;
 import com.shitikov.task8.model.service.LibraryService;
 import com.shitikov.task8.model.service.impl.LibraryServiceImpl;
+import com.shitikov.task8.model.entity.KeyType;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +20,7 @@ public class FindByPagesCommand implements Command {
 
         if (parameters.containsKey(KeyType.PAGES.getName())) {
             String pages = parameters.get("pages");
-            List<Book> foundBooks = libraryService.findByPages(pages);
+            List<Book> foundBooks = libraryService.findByKey(KeyType.PAGES, pages);
             response.put(CommandResponse.FOUND_RESPONSE.getMessage(), foundBooks);
         }
         return response;

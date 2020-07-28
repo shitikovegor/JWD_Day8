@@ -2,11 +2,11 @@ package com.shitikov.task8.controller.command.impl;
 
 import com.shitikov.task8.controller.command.Command;
 import com.shitikov.task8.controller.command.type.CommandResponse;
-import com.shitikov.task8.util.KeyType;
 import com.shitikov.task8.model.entity.Book;
-import com.shitikov.task8.model.service.LibraryService;
 import com.shitikov.task8.model.exception.LibraryServiceException;
+import com.shitikov.task8.model.service.LibraryService;
 import com.shitikov.task8.model.service.impl.LibraryServiceImpl;
+import com.shitikov.task8.model.entity.KeyType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,10 +30,16 @@ public class AddBookCommand implements Command {
                 String publishingHouse = parameters.get("publishingHouse");
                 String pages = parameters.get("pages");
 
-                libraryService.add(name, authors, publishingHouse, pages);
-                response.put(CommandResponse.ADD_RESPONSE.getMessage(), libraryService.findAll());
+                if (libraryService.add(name, authors, publishingHouse, pages)) {
+                    response.put(CommandResponse.ADD_RESPONSE.getMessage(),
+                            libraryService.findAll());
+                } else {
+                    response.put(CommandResponse.NO_ADD_RESPONSE.getMessage(),
+                            libraryService.findAll());
+                }
             } catch (LibraryServiceException ex) {
-                response.put(CommandResponse.BAD_RESPONSE.getMessage().concat(ex.getMessage()), new ArrayList<>());
+                response.put(CommandResponse.BAD_RESPONSE.getMessage().concat(ex.getMessage()),
+                        new ArrayList<>());
             }
         }
         return response;

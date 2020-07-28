@@ -21,9 +21,7 @@ public class LibraryController {
         Map<String, List<Book>> response;
 
         Command command = CommandProvider.defineCommand(commandName);
-
         response = command.execute(parameters);
-
         return response;
     }
 }

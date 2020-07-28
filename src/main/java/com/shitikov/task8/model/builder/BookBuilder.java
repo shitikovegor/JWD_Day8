@@ -62,7 +62,7 @@ public class BookBuilder {
         return new Book(this);
     }
 
-    List<String> authorsToList(String authors) {
+    private List<String> authorsToList(String authors) {
 
         List<String> result = new ArrayList<>();
         String[] authorsForFill = authors.split(DELIMITER);

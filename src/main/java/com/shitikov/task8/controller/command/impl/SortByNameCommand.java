@@ -5,7 +5,7 @@ import com.shitikov.task8.controller.command.type.CommandResponse;
 import com.shitikov.task8.model.entity.Book;
 import com.shitikov.task8.model.service.LibraryService;
 import com.shitikov.task8.model.service.impl.LibraryServiceImpl;
-import com.shitikov.task8.util.KeyType;
+import com.shitikov.task8.model.entity.KeyType;
 
 import java.util.HashMap;
 import java.util.List;
@@ -19,8 +19,8 @@ public class SortByNameCommand implements Command {
         Map<String, List<Book>> response = new HashMap<>();
 
         List<Book> sortedBooks = libraryService.sortByKey(KeyType.NAME);
-        response.put(CommandResponse.SORT_RESPONSE.getMessage().concat(KeyType.NAME.getName()), sortedBooks);
-
+        response.put(CommandResponse.SORT_RESPONSE.getMessage()
+                .concat(KeyType.NAME.getName()), sortedBooks);
         return response;
     }
 }

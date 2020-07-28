@@ -20,27 +20,6 @@ public class BookValidator {
         return instance;
     }
 
-    public boolean isNameCorrect(String name) {
-        if (name == null) {
-            return false;
-        }
-        return isStringParameterCorrect(name);
-    }
-
-    public boolean isAuthorCorrect(String author) {
-        if (author == null) {
-            return false;
-        }
-        return isStringParameterCorrect(author);
-    }
-
-    public boolean isPublishingHouseCorrect(String publishingHouse) {
-        if (publishingHouse == null) {
-            return false;
-        }
-        return isStringParameterCorrect(publishingHouse);
-    }
-
     public boolean arePagesCorrect(String pages) {
         try {
             int pagesNumber = Integer.parseInt(pages);

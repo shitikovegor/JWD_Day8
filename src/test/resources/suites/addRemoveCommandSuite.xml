@@ -9,8 +9,9 @@
 
     <test name = "addRemoveCommandSuite">
         <classes>
-            <class name="com.shitikov.task6.controller.command.impl.AddBookCommandTest"/>
-            <class name="com.shitikov.task6.controller.command.impl.RemoveBookCommandTest"/>
+            <class name="com.shitikov.task8.controller.command.impl.AddBookCommandTest"/>
+            <class name="com.shitikov.task8.controller.command.impl.RemoveBookCommandTest"/>
+            <class name="com.shitikov.task8.controller.command.impl.RemoveBookByIdCommandTest"/>
         </classes>
     </test>
 </suite>

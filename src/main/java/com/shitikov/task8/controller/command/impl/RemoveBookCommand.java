@@ -2,11 +2,11 @@ package com.shitikov.task8.controller.command.impl;
 
 import com.shitikov.task8.controller.command.Command;
 import com.shitikov.task8.controller.command.type.CommandResponse;
-import com.shitikov.task8.util.KeyType;
 import com.shitikov.task8.model.entity.Book;
-import com.shitikov.task8.model.service.LibraryService;
 import com.shitikov.task8.model.exception.LibraryServiceException;
+import com.shitikov.task8.model.service.LibraryService;
 import com.shitikov.task8.model.service.impl.LibraryServiceImpl;
+import com.shitikov.task8.model.entity.KeyType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,17 +31,16 @@ public class RemoveBookCommand implements Command {
             String pages = parameters.get("pages");
 
             try {
-                libraryService.remove(name, authors, publishingHouse, pages);
-                response.put(CommandResponse.REMOVE_RESPONSE.getMessage(),
-                        libraryService.findAll());
-            } catch (LibraryServiceException lse) {
-                if (lse.getMessage().equals("Book doesn't exist in library.")) {
-                    response.put(CommandResponse.NOT_EXIST_RESPONSE.getMessage(),
+                if (libraryService.remove(name, authors, publishingHouse, pages)) {
+                    response.put(CommandResponse.REMOVE_RESPONSE.getMessage(),
                             libraryService.findAll());
                 } else {
-                    response.put(CommandResponse.BAD_RESPONSE.getMessage()
-                            .concat(lse.getMessage()), new ArrayList<>());
+                    response.put(CommandResponse.NOT_EXIST_RESPONSE.getMessage(),
+                            libraryService.findAll());
                 }
+            } catch (LibraryServiceException lse) {
+                response.put(CommandResponse.BAD_RESPONSE.getMessage()
+                        .concat(lse.getMessage()), new ArrayList<>());
             }
         }
         return response;
